@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    {% include 'utilities/head.html' with title='Onboarding - View Candidate!' css_link='onboarding/css/dashboard.css' css_link2='onboarding/css/form.css' %}
+  </head>  
+  <body>
+    <!-- navbar start -->
+    {% include 'utilities/navbar.html' %}
+    <!-- navbar end -->
+    <div class="form_container">
+        <div class="form_header">
+            <h3>Candidate Profile</h3>
+        </div>
+        <form action="">
+            <div class="input__row">
+                <div class="input__div">
+                    <input class="form__input" disabled type="text" name="firstname" id="firstname" maxlength="50"
+                        placeholder=" " autofocus tabindex="1" required value="{{ selected.firstname }}">
+                    <label for="firstname" class="form__label">First Name</label>
+                </div>
+                <div class="input__div">
+                    <input class="form__input" value="{{ selected.middlename }}" disabled type="text" name="middlename" id="middlename" maxlength="10"
+                        placeholder=" "  tabindex="2" required>
+                    <label for="middlename" class="form__label">Middle Name</label>
+                </div>
+            </div>
+            <div class="input__row">
+                <div class="input__div">
+                    <input class="form__input" value="{{ selected.lastname }}" disabled type="text" name="lastname" id="lastname" maxlength="10"
+                        placeholder=" "  tabindex="3" required>
+                    <label for="lastname" class="form__label">Last Name</label>
+                </div>
+                <div class="input__div">
+                    <input class="form__input" disabled type="date" name="dob" id="dob"
+                        placeholder=" " value="{{ selected.dob }}" tabindex="4" required>
+                    <label for="dob" class="form__label">Date of Birth</label>
+                </div>
+            </div>
+            <div class="input__row">
+                <div class="input__div">
+                    <input class="form__input" disabled type="text" name="phone" id="phone" maxlength="10"
+                        placeholder=" "  tabindex="5" value="{{ selected.phone }}" required>
+                    <label for="phone" class="form__label">Phone</label>
+                </div>
+                <div class="input__div">
+                    <input class="form__input" disabled type="text" name="adhaar" id="adhaar" maxlength="12"
+                        placeholder=" "  tabindex="6" value="{{ selected.adhaar }}" required>
+                    <label for="adhaar" class="form__label">Adhaar</label>
+                </div>
+            </div>
+            <div class="input__row">
+                <div class="input__div">
+                    <input class="form__input" disabled type="date" name="doj" id="doj"
+                        placeholder=" " tabindex="7" value="{{ selected.doj }}" required>
+                    <label for="doj" class="form__label">Date of Joining</label>
+                </div>
+                <div class="input__div">
+                    <select class="form__input" disabled tabindex="8"  required name="function" id="function">
+                        <option value="{{ selected.fk_function_id }}" selected>{{ selected.fk_function }}</option>
+                        {% for each in function %}
+                            <option value="{{ each.pk }}" id="{{ each.pk }}">{{ each.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="function" class="form__label">Function</label>
+                </div>
+            </div>
+            <div class="input__row">
+                <div class="input__div">
+                    <select class="form__input" disabled tabindex="9" required name="subfunction" id="subfunction">
+                        <option value="{{ selected.fk_sub_function_id }}" selected>{{ selected.fk_sub_function }}</option>
+
+                        {% for each in subfunction %}
+                            <option value="{{ each.pk }}" id="{{ each.fk_function_id }}">{{ each.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="subfunction" class="form__label">Sub Function</label>
+                </div>
+                <div class="input__div">
+                    <select class="form__input" disabled tabindex="10" required name="designation" id="designation">
+                        <option value="{{ selected.fk_designation_id }}" selected>{{ selected.fk_designation }}</option>
+
+                        {% for each in designation %}
+                            <option value="{{ each.pk }}" id="{{ each.fk_sub_function_id }}">{{ each.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="designation" class="form__label">Designation</label>
+                </div>
+            </div>
+            <div class="input__row">
+                <div class="input__div">
+                    <select class="form__input" disabled tabindex="11" required name="state" id="state">
+                        <option value="{{ selected.fk_state_id }}" selected>{{ selected.fk_state }}</option>
+
+                        {% for each in state %}
+                            <option value="{{ each.pk }}" id="{{ each.pk }}">{{ each.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="state" class="form__label">State</label>
+                </div>
+                <div class="input__div">
+                    <select class="form__input" disabled tabindex="12" required name="location" id="location">
+                        <option value="{{ selected.fk_location_id }}" selected>{{ selected.fk_location }}</option>
+
+                        {% for each in location %}
+                            <option value="{{ each.pk }}" id="{{ each.fk_location_id }}">{{ each.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="location" class="form__label">Location</label>
+                </div>
+            </div>
+            <div class="input__row">
+                <div class="input__div">
+                    <select class="form__input" disabled tabindex="13" required name="sublocation" id="sublocation">
+                        <option value="{{ selected.fk_sub_location_id }}" selected>{{ selected.fk_sub_location }}</option>
+
+                        {% for each in sublocation %}
+                            <option value="{{ each.pk }}" id="{{ each.fk_location_id }}">{{ each.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="sublocation" class="form__label">Sub Location</label>
+                </div>
+                <div class="input__div">
+                    <select class="form__input" disabled tabindex="14" required name="recuiter" id="recuiter">
+                        <option value="{{ selected.recruiter }}" selected>{{ selected.recruiter }}</option>
+
+                        {% for each in recruiters %}
+                            <option value="{{ each.user_id }}">{{ each.user_id }} | {{ each.first_name }} {{ each.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="recuiter" class="form__label">Recruiter</label>
+                </div>
+            </div>
+            <div class="input__row">
+                <div class="input__div">
+                    <select class="form__input" disabled tabindex="15" required name="obspoc" id="obspoc">
+                        <option value="{{ selected.obspoc }}" selected>{{ selected.obspoc }}</option>
+
+                        {% for each in obspocs %}
+                            <option value="{{ each.user_id }}">{{ each.user_id }} | {{ each.first_name }} {{ each.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="obspoc" class="form__label">Onboarding SPOC</label>
+                </div>
+                <div class="input__div">
+                    <select id="status" tabindex="16" name="status" disabled class="form__input">
+                        <option value="{{ selected.status }}" selected>{{ selected.status }}</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Approve">Approve</option>
+                        <option value="Reject">Reject</option>
+                    </select>
+                    <label for="status" class="form__label">Status</label>
+                </div>
+            </div>
+            <div class="save_btn_div">
+                <button type="button" class="cancel_btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

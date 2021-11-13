@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    {% include 'utilities/head.html' with title='Onboarding - Dashboard!' css_link='onboarding/css/dashboard.css' %}
+  </head>  
+  <body background="{%static 'onboarding/images/loginbg4.jpg' %}" style="background-size: cover;">
+    <!-- navbar start -->
+    {% include 'utilities/navbar.html' %}
+    <!-- navbar end -->
+
+    <!-- container -->    
+    {% if group == 'Recruiter' %}
+      {% include 'dashboard/recruiter/container.html' %}
+    {% elif group == 'Obspoc' %}
+      {% include 'dashboard/obspoc/container.html' %}    
+    {% elif group == 'Candidate' %}
+      {% include 'dashboard/candidate/container.html' %}
+    {% else %}
+      {% include 'dashboard/admin/container.html' %}
+    {% endif %}
+    <!-- container end -->
+  </body>
+</html>
+    

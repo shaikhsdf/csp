@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    {% include 'utilities/head.html' with title='Onboarding - Create Candidate!' css_link='onboarding/css/dashboard.css' css_link2='onboarding/css/form.css' %}
+  </head>  
+  <body>
+    <!-- navbar start -->
+    {% include 'utilities/navbar.html' %}
+    <!-- navbar end -->
+
+    <!-- form -->
+    {% include 'candidate/crud/form.html' %}
+    <!-- form end -->
+  </body>
+</html>

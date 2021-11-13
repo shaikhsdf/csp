@@ -1,0 +1,53 @@
+<div class="table_div">
+    <table id="tbl" class="data_table">
+        <thead>
+            <tr>
+                <th>CANDIDATE ID</th>
+                <th>NAME</th>
+                <th>PHONE</th>
+                <th>DATE OF JOINING</th>
+                <th>SUB FUNCTION</th>
+                <th>DESIGNATION</th>
+                <th>STATE</th>
+                <th>RECRUITER</th>
+                <th>OBSPOC</th>
+                <th>STATUS</th>
+            </tr>      
+        </thead>
+        <tbody>
+            {% for each in data %}
+                <tr>
+                    <td> <a {% if each.status == 'Pending' and group == 'Obspoc' %} href="{% url 'onboarding:edit_candidate' %}" {% elif group == 'Recruiter' %} href="{% url 'onboarding:view_candidate' %}" {% else %} href="{% url 'onboarding:view_candidate' %}" {% endif %}>{{ each.id }}</a> </td>
+                    <td>{{ each.first_name }} {{ each.middle_name|default_if_none:'' }} {{ each.last_name|default_if_none:'' }}</td>
+                    <td>{{ each.phone }}</td>
+                    <td>{{ each.doj }}</td>
+                    <td>{{ each.sub_function }}</td>
+                    <td>{{ each.designation }}</td>
+                    <td>{{ each.state }}</td>
+                    <td>{{ each.recruiter }}</td>
+                    <td>{{ each.obspoc }}</td>
+                    <td>{{ each.status }}</td>
+
+                </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready( function () {
+        $('#tbl').DataTable();
+    } );
+</script>

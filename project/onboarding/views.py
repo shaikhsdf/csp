@@ -9,7 +9,6 @@ def logo(request):
 
 def logi(request):
     if request.method == 'POST':
-        print("Post")
         username = request.POST.get('username').title()
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
@@ -44,21 +43,27 @@ def create_candidate(request):
             'dob':request.POST.get('dob'),
             'phone':request.POST.get('phone'),
             'adhaar':request.POST.get('adhaar'),
-            'doj':request.POST.get('doj'),
-            'fk_function_id':request.POST.get('function'),
-            'fk_sub_function_id':request.POST.get('subfunction'),
-            'fk_designation_id':request.POST.get('designation'),
-            'fk_state_id':request.POST.get('state'),
-            'fk_location_id':request.POST.get('location'),
-            'fk_sub_location_id':request.POST.get('sublocation'),
+            'doj':None,
+            'fk_function_id':int(request.POST.get('function')),
+            'fk_sub_function_id':int(request.POST.get('subfunction')),
+            'fk_designation_id':int(request.POST.get('designation')),
+            'fk_state_id':int(request.POST.get('state')),
+            'fk_location_id':int(request.POST.get('location')),
+            'fk_sub_location_id':int(request.POST.get('sublocation')),
             'created_by':str(request.user),
-            'recruiter':request.POST.get('recruiter'),
-            'obspoc':request.POST.get('obspoc'),
+            'recruiter':str(request.user),
+            'obspoc_id':int(request.POST.get('obspoc')),
             'status':'Pending'
         }
-        getattr(models, 'candidate').objects.create(**save_map)
-        msg = 'Candidate created successfully'
-        all_candidate = getattr( models, 'candidate').objects.filter(**{'created_by': str(request.user)}).order_by('created_datetime')
+        print(save_map)
+        a = getattr(models, 'candidate').objects.create(**save_map)
+        
+        print('Candidate created successfully')
+        group = getattr(models, 'user_group').objects.filter(**{'user__username': str(request.user)}).values_list('group__name', flat=True)[0]
+        if group == 'Recruiter':
+            all_candidate = getattr( models, 'candidate').objects.filter(**{'created_by': str(request.user)}).order_by('created_datetime')
+        else:
+            all_candidate = getattr( models, 'candidate').objects.all().order_by('created_datetime')
         return render(request, CANDIDATE_TABLE_CONTAINER_HTML, {'data': all_candidate})
     context = {
         'function' : getattr(models, 'function').objects.all(),

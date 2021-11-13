@@ -16,18 +16,18 @@
             <div class="input__row">
                 <div class="input__div">
                     <input class="form__input" disabled type="text" name="firstname" id="firstname" maxlength="50"
-                        placeholder=" " autofocus tabindex="1" required value="{{ selected.firstname }}">
+                        placeholder=" " autofocus tabindex="1" required value="{{ selected.first_name }}">
                     <label for="firstname" class="form__label">First Name</label>
                 </div>
                 <div class="input__div">
-                    <input class="form__input" value="{{ selected.middlename }}" disabled type="text" name="middlename" id="middlename" maxlength="10"
+                    <input class="form__input" value="{{ selected.middle_name|default_if_none:'' }}" disabled type="text" name="middlename" id="middlename" maxlength="10"
                         placeholder=" "  tabindex="2" required>
                     <label for="middlename" class="form__label">Middle Name</label>
                 </div>
             </div>
             <div class="input__row">
                 <div class="input__div">
-                    <input class="form__input" value="{{ selected.lastname }}" disabled type="text" name="lastname" id="lastname" maxlength="10"
+                    <input class="form__input" value="{{ selected.last_name|default_if_none:'' }}" disabled type="text" name="lastname" id="lastname" maxlength="10"
                         placeholder=" "  tabindex="3" required>
                     <label for="lastname" class="form__label">Last Name</label>
                 </div>

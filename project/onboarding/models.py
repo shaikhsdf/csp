@@ -76,7 +76,7 @@ class candidate(models.Model):
     dob = models.DateField(null=True, blank=True)
     phone = models.CharField(max_length=10)
     adhaar = models.CharField(max_length=12)
-    doj = models.DateField(null=True, blank=True)
+    doj = models.DateField(null=True, blank=True, default=None)
     fk_function = models.ForeignKey(function, on_delete=models.CASCADE, null=True, default=None)
     fk_sub_function = models.ForeignKey(sub_function, on_delete=models.CASCADE, null=True, default=None)
     fk_designation = models.ForeignKey(designation, on_delete=models.CASCADE, null=True, default=None)
@@ -85,10 +85,10 @@ class candidate(models.Model):
     fk_sub_location = models.ForeignKey(sub_location, on_delete=models.CASCADE, null=True, default=None)
     created_by = models.CharField(max_length=100)
     created_datetime = models.DateTimeField(auto_now_add=True)
-    recruiter = models.ForeignKey( user_group, related_name='recruiter', on_delete=models.CASCADE, null=True, default=None)
-    obspoc = models.ForeignKey( user_group, related_name='obspoc', on_delete=models.CASCADE, null=True, default=None)
+    recruiter = models.CharField(max_length=100, default='R001')
+    obspoc = models.ForeignKey( user_group, on_delete=models.CASCADE, null=True, default=None)
     status = models.CharField(max_length=100)
-    group = models.ForeignKey( Group, on_delete=models.CASCADE, null=True, default=None, blank=True)
+    group = models.ForeignKey( Group, on_delete=models.CASCADE, null=True, default=4, blank=True)
 
     def __str__(self):
         return self.first_name + ' ' + str(self.last_name)

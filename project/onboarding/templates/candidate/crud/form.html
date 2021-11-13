@@ -3,7 +3,8 @@
     <div class="form_header">
         <h3>Candidate Creation Form</h3>
     </div>
-    <form action="">
+    <form action="{% url 'onboarding:create_candidate' %}" method="post">
+        {% csrf_token %}
         <div class="input__row">
             <div class="input__div">
                 <input class="form__input" type="text" name="firstname" id="firstname" maxlength="50"
@@ -12,14 +13,14 @@
             </div>
             <div class="input__div">
                 <input class="form__input" type="text" name="middlename" id="middlename" maxlength="10"
-                       placeholder=" "  tabindex="2" required>
+                       placeholder=" "  tabindex="2">
                 <label for="middlename" class="form__label">Middle Name</label>
             </div>
         </div>
         <div class="input__row">
             <div class="input__div">
                 <input class="form__input" type="text" name="lastname" id="lastname" maxlength="10"
-                       placeholder=" "  tabindex="3" required>
+                       placeholder=" "  tabindex="3">
                 <label for="lastname" class="form__label">Last Name</label>
             </div>
             <div class="input__div">
@@ -31,19 +32,19 @@
         <div class="input__row">
             <div class="input__div">
                 <input class="form__input" type="text" name="phone" id="phone" maxlength="10"
-                       placeholder=" "  tabindex="5" required>
+                       placeholder=" " pattern="^[6-9]{1}[0-9]{9}$"  tabindex="5" required>
                 <label for="phone" class="form__label">Phone</label>
             </div>
             <div class="input__div">
                 <input class="form__input" type="text" name="adhaar" id="adhaar" maxlength="12"
-                       placeholder=" "  tabindex="6" required>
+                       placeholder=" "  tabindex="6" pattern="^[0-9]{12}$" required>
                 <label for="adhaar" class="form__label">Adhaar</label>
             </div>
         </div>
         <div class="input__row">
             <div class="input__div">
                 <input class="form__input" type="date" name="doj" id="doj"
-                       placeholder=" " tabindex="7" required>
+                       placeholder=" " tabindex="7" disabled>
                 <label for="doj" class="form__label">Date of Joining</label>
             </div>
             <div class="input__div">
@@ -100,7 +101,7 @@
             <div class="input__div">
                 <select class="form__input" tabindex="13" required name="sublocation" id="sublocation">
                     <option value=""></option>
-                    {% for each in state %}
+                    {% for each in sublocation %}
                         <option value="{{ each.pk }}" id="{{ each.fk_location_id }}">{{ each.name }}</option>
                     {% endfor %}
                 </select>
@@ -127,7 +128,7 @@
                 <label for="obspoc" class="form__label">Onboarding SPOC</label>
             </div>
             <div class="input__div">
-                <input type="text" id="status" tabindex="16" name="status" class="form__input" placeholder=" ">
+                <input type="text" id="status" tabindex="16" name="status" readonly value="Pending" class="form__input" placeholder=" ">
                 <label for="status" class="form__label">Status</label>
             </div>
         </div>
